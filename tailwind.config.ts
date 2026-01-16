@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        serif: ['Cormorant Garamond', 'serif'],
+        sans: ['Inter', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -47,6 +51,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        help: {
+          DEFAULT: "hsl(var(--help))",
+          foreground: "hsl(var(--help-foreground))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -65,25 +77,36 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "swipe-right": {
+          "0%": { transform: "translateX(0) rotate(0deg)", opacity: "1" },
+          "100%": { transform: "translateX(150%) rotate(20deg)", opacity: "0" },
+        },
+        "swipe-left": {
+          "0%": { transform: "translateX(0) rotate(0deg)", opacity: "1" },
+          "100%": { transform: "translateX(-150%) rotate(-20deg)", opacity: "0" },
+        },
+        "card-enter": {
+          "0%": { transform: "scale(0.95)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "swipe-right": "swipe-right 0.4s ease-out forwards",
+        "swipe-left": "swipe-left 0.4s ease-out forwards",
+        "card-enter": "card-enter 0.3s ease-out forwards",
+      },
+      backgroundImage: {
+        'gold-gradient': 'linear-gradient(135deg, hsl(43, 74%, 49%) 0%, hsl(38, 80%, 55%) 50%, hsl(45, 85%, 60%) 100%)',
+        'shimmer': 'linear-gradient(90deg, transparent 0%, hsl(43, 74%, 49%, 0.3) 50%, transparent 100%)',
       },
     },
   },
