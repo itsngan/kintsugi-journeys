@@ -31,26 +31,20 @@ const Discover: React.FC = () => {
 
   // Get unique filter options
   const filterOptions = useMemo(() => {
-    const schools = new Set<string>();
-    const companies = new Set<string>();
-    const tags = new Set<string>();
+    // Use fixed lists for schools and companies per design requirements
+    const schools = ['UBC', 'UofT', 'Western', 'Waterloo', 'York', 'TMU'];
+    const companies = ['RBC', 'Google', 'Nokia', 'Amazon'];
 
+    // Keep tags dynamic based on mockProfiles
+    const tagsSet = new Set<string>();
     mockProfiles.forEach(profile => {
-      profile.journey.forEach(node => {
-        if (node.company?.toLowerCase().includes('university') || 
-            node.company?.toLowerCase().includes('college')) {
-          schools.add(node.company);
-        } else if (node.company && !node.isEmpty) {
-          companies.add(node.company);
-        }
-      });
-      profile.tags.forEach(tag => tags.add(tag.label));
+      profile.tags.forEach(tag => tagsSet.add(tag.label));
     });
 
     return {
-      schools: Array.from(schools),
-      companies: Array.from(companies),
-      tags: Array.from(tags),
+      schools,
+      companies,
+      tags: Array.from(tagsSet),
     };
   }, []);
 
@@ -356,7 +350,7 @@ const Discover: React.FC = () => {
                 <h3 className="font-medium text-foreground mb-3">Their Journey</h3>
                 <div className="bg-card rounded-xl p-4 border border-border">
                   <JourneyGraph 
-                    nodes={viewingProfile.journey}
+                    nodes={viewingProfile.journey.filter(n => !n.isEmpty)}
                     isEditable={false}
                   />
                 </div>
